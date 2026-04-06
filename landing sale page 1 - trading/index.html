@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kind Traders Hub | Kwizerana Finance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-primary: #07070d;
+      --bg-secondary: #0d0d17;
+      --bg-card: #10101e;
+      --bg-card-hover: #15152a;
+      --border: rgba(255,255,255,0.07);
+      --border-hover: rgba(201,162,39,0.35);
+      --gold: #c9a227;
+      --gold-light: #f0c040;
+      --gold-dim: rgba(201,162,39,0.15);
+      --purple: #7c3aed;
+      --purple-light: #a78bfa;
+      --purple-dim: rgba(124,58,237,0.15);
+      --text-primary: #eeeef5;
+      --text-secondary: #8888a8;
+      --text-muted: #555570;
+      --green: #10b981;
+      --green-dim: rgba(16,185,129,0.15);
+      --red: #ef4444;
+      --score-high: #10b981;
+      --score-mid: #f59e0b;
+      --score-low: #ef4444;
+      --radius: 14px;
+      --radius-sm: 8px;
+      --shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* BACKGROUND EFFECTS */
+    body::before {
+      content: '';
+      position: fixed;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 600px;
+      background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, rgba(201,162,39,0.06) 50%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(7,7,13,0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+    .nav-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--gold), var(--purple-light));
+      border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 800; color: #fff;
+      box-shadow: 0 0 20px rgba(201,162,39,0.3);
+    }
+    .nav-logo-text {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--text-primary); line-height: 1.2;
+    }
+    .nav-logo-sub { font-size: 0.65rem; color: var(--gold); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-links a {
+      font-size: 0.85rem; color: var(--text-secondary);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      padding: 8px 20px;
+      background: linear-gradient(135deg, var(--gold), #e0a820);
+      color: #0a0a0a; font-size: 0.82rem; font-weight: 700;
+      border-radius: 8px; text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* HERO */
+    .hero {
+      position: relative; z-index: 1;
+      max-width: 1400px; margin: 0 auto;
+      padding: 90px 2rem 60px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--gold-dim); border: 1px solid rgba(201,162,39,0.3);
+      border-radius: 100px; padding: 5px 14px;
+      font-size: 0.75rem; font-weight: 600; color: var(--gold);
+      margin-bottom: 24px; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .hero-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 40%, var(--purple-light) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      font-size: 1.1rem; color: var(--text-secondary);
+      max-width: 600px; margin: 0 auto 40px; line-height: 1.7;
+    }
+    .hero-stats {
+      display: flex; justify-content: center; align-items: center;
+      gap: 40px; flex-wrap: wrap; margin-bottom: 0;
+    }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem; font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-light), var(--purple-light));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px; }
+    .hero-divider { width: 1px; height: 40px; background: var(--border); }
+
+    /* CONTROLS */
+    .controls-section {
+      max-width: 1400px; margin: 0 auto;
+      padding: 0 2rem 30px;
+      position: relative; z-index: 1;
+    }
+    .controls-top {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; margin-bottom: 20px;
+    }
+
+    /* TABS */
+    .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tab-btn {
+      padding: 9px 18px;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 0.83rem; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-dim); }
+    .tab-btn.active {
+      background: linear-gradient(135deg, var(--gold), #e0a820);
+      border-color: transparent;
+      color: #0a0a0a;
+    }
+
+    /* SEARCH + SORT */
+    .controls-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .search-wrap { position: relative; }
+    .search-wrap input {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-size: 0.85rem;
+      padding: 9px 14px 9px 38px;
+      width: 220px;
+      font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.2s;
+    }
+    .search-wrap input:focus { border-color: var(--gold); }
+    .search-wrap input::placeholder { color: var(--text-muted); }
+    .search-icon {
+      position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
+      color: var(--text-muted); font-size: 14px; pointer-events: none;
+    }
+    select.sort-select {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      font-size: 0.83rem;
+      padding: 9px 14px;
+      font-family: 'Inter', sans-serif;
+      outline: none; cursor: pointer; transition: border-color 0.2s;
+    }
+    select.sort-select:focus { border-color: var(--gold); }
+
+    /* GEO FILTER */
+    .geo-filter { display: flex; gap: 6px; flex-wrap: wrap; }
+    .geo-btn {
+      padding: 5px 12px;
+      background: transparent; border: 1px solid var(--border);
+      border-radius: 100px; color: var(--text-secondary);
+      font-size: 0.75rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .geo-btn:hover { border-color: var(--purple-light); color: var(--purple-light); }
+    .geo-btn.active { background: var(--purple-dim); border-color: var(--purple-light); color: var(--purple-light); }
+
+    /* SECTION HEADER */
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem; font-weight: 700; color: var(--text-primary);
+    }
+    .section-count {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 2px 10px; font-size: 0.75rem; color: var(--text-muted);
+    }
+    .section-line { flex: 1; height: 1px; background: var(--border); }
+
+    /* GRID */
+    .grid-section { max-width: 1400px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+    .exchange-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 16px;
+      margin-bottom: 50px;
+    }
+    .exchange-grid.hidden { display: none; }
+
+    /* CARD */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: all 0.25s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(201,162,39,0.1);
+    }
+    .card:hover::before { opacity: 1; }
+
+    /* RANK BADGE */
+    .rank-badge {
+      position: absolute; top: 14px; right: 14px;
+      width: 28px; height: 28px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif;
+    }
+    .rank-1 { background: linear-gradient(135deg, #c9a227, #f0c040); color: #0a0a0a; }
+    .rank-2 { background: rgba(148,163,184,0.2); color: #94a3b8; border: 1px solid rgba(148,163,184,0.3); }
+    .rank-3 { background: rgba(180,120,70,0.2); color: #cd7f32; border: 1px solid rgba(180,120,70,0.3); }
+    .rank-other { display: none; }
+
+    .card-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px; }
+    .logo-wrap {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .logo-wrap img {
+      width: 28px; height: 28px; object-fit: contain;
+    }
+    .logo-fallback {
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.9rem; color: #fff;
+    }
+    .card-meta { flex: 1; min-width: 0; }
+    .card-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem; font-weight: 700; margin-bottom: 4px;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+    .tag {
+      padding: 2px 8px; border-radius: 5px;
+      font-size: 0.67rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+    }
+    .tag-cex { background: rgba(59,130,246,0.15); color: #60a5fa; border: 1px solid rgba(59,130,246,0.2); }
+    .tag-dex { background: rgba(16,185,129,0.12); color: #34d399; border: 1px solid rgba(16,185,129,0.2); }
+    .tag-perp-cex { background: rgba(245,158,11,0.12); color: #fbbf24; border: 1px solid rgba(245,158,11,0.2); }
+    .tag-perp-dex { background: rgba(167,139,250,0.15); color: #a78bfa; border: 1px solid rgba(167,139,250,0.25); }
+    .tag-geo { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--border); }
+
+    /* OVERALL SCORE */
+    .score-overall {
+      display: flex; align-items: center; gap: 10px;
+      padding: 12px 14px;
+      background: var(--bg-secondary);
+      border-radius: 10px; margin-bottom: 14px;
+      border: 1px solid var(--border);
+    }
+    .score-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.8rem; font-weight: 800;
+      line-height: 1;
+    }
+    .score-high { color: var(--score-high); }
+    .score-mid { color: var(--score-mid); }
+    .score-low { color: var(--score-low); }
+    .score-label-wrap { flex: 1; }
+    .score-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); font-weight: 600; }
+    .score-stars { font-size: 0.8rem; margin-top: 2px; }
+
+    /* SCORE BARS */
+    .score-bars { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
+    .score-row { display: flex; align-items: center; gap: 10px; }
+    .score-row-label { font-size: 0.73rem; color: var(--text-secondary); width: 68px; flex-shrink: 0; }
+    .score-bar-track {
+      flex: 1; height: 5px; border-radius: 100px;
+      background: rgba(255,255,255,0.07); overflow: hidden;
+    }
+    .score-bar-fill {
+      height: 100%; border-radius: 100px;
+      background: linear-gradient(90deg, var(--green), #34d399);
+      transform-origin: left;
+      animation: fillBar 1s ease forwards;
+    }
+    @keyframes fillBar { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+    .score-row-val { font-size: 0.73rem; font-weight: 700; color: var(--text-primary); width: 26px; text-align: right; flex-shrink: 0; }
+
+    /* CARD FOOTER */
+    .card-footer { display: flex; align-items: center; gap: 8px; }
+    .btn-trade {
+      flex: 1; padding: 10px;
+      background: linear-gradient(135deg, var(--gold), #d4a820);
+      border: none; border-radius: 9px;
+      color: #0a0a0a; font-weight: 700; font-size: 0.83rem;
+      cursor: pointer; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 5px;
+      transition: all 0.2s; font-family: 'Inter', sans-serif;
+    }
+    .btn-trade:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(201,162,39,0.3); }
+    .btn-info {
+      width: 38px; height: 38px;
+      background: var(--bg-secondary); border: 1px solid var(--border);
+      border-radius: 9px; color: var(--text-secondary);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; text-decoration: none; transition: all 0.2s;
+      font-size: 13px;
+    }
+    .btn-info:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* HOT BADGE */
+    .hot-badge {
+      position: absolute; top: 14px; left: 14px;
+      background: linear-gradient(135deg, #ef4444, #f97316);
+      color: #fff; font-size: 0.6rem; font-weight: 800;
+      padding: 2px 7px; border-radius: 5px; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .new-badge {
+      position: absolute; top: 14px; left: 14px;
+      background: linear-gradient(135deg, #7c3aed, #a855f7);
+      color: #fff; font-size: 0.6rem; font-weight: 800;
+      padding: 2px 7px; border-radius: 5px; letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* NO RESULTS */
+    .no-results {
+      grid-column: 1 / -1; text-align: center; padding: 60px 20px;
+      color: var(--text-muted); font-size: 1rem;
+    }
+
+    /* DISCLAIMER BANNER */
+    .disclaimer {
+      max-width: 1400px; margin: 0 auto 40px;
+      padding: 0 2rem;
+      position: relative; z-index: 1;
+    }
+    .disclaimer-inner {
+      background: rgba(201,162,39,0.05);
+      border: 1px solid rgba(201,162,39,0.15);
+      border-radius: var(--radius-sm);
+      padding: 14px 20px;
+      font-size: 0.78rem; color: var(--text-muted); line-height: 1.6;
+    }
+    .disclaimer-inner strong { color: var(--gold); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 2rem;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      max-width: 1400px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 10px; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.8rem; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-copy { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* SCROLL TOP */
+    .scroll-top {
+      position: fixed; bottom: 28px; right: 28px;
+      width: 42px; height: 42px;
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: var(--text-secondary); cursor: pointer; z-index: 99;
+      transition: all 0.2s; opacity: 0; pointer-events: none;
+      font-size: 14px;
+    }
+    .scroll-top.visible { opacity: 1; pointer-events: all; }
+    .scroll-top:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero { padding: 60px 1.5rem 40px; }
+      .hero-divider { display: none; }
+      .controls-section, .grid-section { padding: 0 1.5rem; }
+      .controls-top { flex-direction: column; align-items: flex-start; }
+      .search-wrap input { width: 100%; }
+      .controls-right { width: 100%; }
+      .exchange-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">K</div>
+      <div>
+        <div class="nav-logo-text">Kind Traders Hub</div>
+        <div class="nav-logo-sub">by Kwizerana Finance</div>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="#cex-spot">CEX Spot</a>
+      <a href="#dex">DEX</a>
+      <a href="#perp-cex">Perp CEX</a>
+      <a href="#perp-dex">Perp DEX</a>
+      <a href="#about">About</a>
+    </div>
+    <a href="#top-picks" class="nav-cta">🏆 Top Picks</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge"><span></span>Live Rankings &amp; Verified Affiliate Links</div>
+  <h1>Your Central Hub for<br/><span class="gradient-text">On-Chain &amp; Off-Chain Trading</span></h1>
+  <p>Discover, compare, and trade on the world's best CEX, DEX, Perp CEX &amp; Perp DEX platforms — scored for fees, liquidity &amp; security.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num">38+</div>
+      <div class="hero-stat-label">Platforms Ranked</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">4</div>
+      <div class="hero-stat-label">Categories</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">100%</div>
+      <div class="hero-stat-label">Affiliate Verified</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">Global</div>
+      <div class="hero-stat-label">Geo Coverage</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTROLS -->
+<div class="controls-section">
+  <div class="controls-top">
+    <div class="tabs">
+      <button class="tab-btn active" data-cat="all">All Platforms</button>
+      <button class="tab-btn" data-cat="cex-spot">📈 CEX Spot</button>
+      <button class="tab-btn" data-cat="dex">🔗 DEX</button>
+      <button class="tab-btn" data-cat="perp-cex">⚡ Perp CEX</button>
+      <button class="tab-btn" data-cat="perp-dex">🌐 Perp DEX</button>
+    </div>
+    <div class="controls-right">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search platforms…"/>
+      </div>
+      <select class="sort-select" id="sortSelect">
+        <option value="overall">Sort: Overall Score</option>
+        <option value="fees">Sort: Fees</option>
+        <option value="liquidity">Sort: Liquidity</option>
+        <option value="security">Sort: Security</option>
+        <option value="name">Sort: A–Z</option>
+      </select>
+    </div>
+  </div>
+  <div class="geo-filter">
+    <span style="font-size:0.75rem;color:var(--text-muted);margin-right:4px;line-height:2;">🌍 Region:</span>
+    <button class="geo-btn active" data-geo="all">All Regions</button>
+    <button class="geo-btn" data-geo="us">🇺🇸 US Available</button>
+    <button class="geo-btn" data-geo="eu">🇪🇺 EU Available</button>
+    <button class="geo-btn" data-geo="asia">🌏 Asia</button>
+    <button class="geo-btn" data-geo="global">🌐 Global</button>
+    <button class="geo-btn" data-geo="no-us">🚫 No US</button>
+  </div>
+</div>
+
+<!-- GRID -->
+<div class="grid-section">
+  <div id="mainGrid" class="exchange-grid"></div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disclaimer">
+  <div class="disclaimer-inner">
+    <strong>⚠️ Affiliate Disclosure &amp; Risk Warning:</strong> Kind Traders Hub earns referral commissions when you sign up via our links — at no extra cost to you. Scores are independently researched. Cryptocurrency trading involves significant risk of loss. This site does not constitute financial advice. Always do your own research (DYOR). Availability varies by jurisdiction — check local regulations before trading.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="about">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo-icon" style="width:32px;height:32px;font-size:16px;">K</div>
+      <div>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:0.9rem;">Kind Traders Hub</div>
+        <div style="font-size:0.7rem;color:var(--gold);">by Kwizerana Finance</div>
+      </div>
+    </div>
+    <div class="footer-links">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">Advertise</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Disclaimer</a>
+    </div>
+    <div class="footer-copy">© 2025 Kwizerana Finance. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- SCROLL TOP -->
+<div class="scroll-top" id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<script>
+// ============================================================
+// DATA — replace YOUR_REF_LINK with actual affiliate URLs
+// ============================================================
+const exchanges = [
+  // ---- CEX SPOT ----
+  {
+    id:'binance', name:'Binance', cat:'cex-spot',
+    logo:'https://bin.bnbstatic.com/static/images/common/favicon.ico',
+    color:'#F0B90B',
+    overall:9.2, fees:9.5, liquidity:9.8, security:8.5,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'World\'s largest crypto exchange by volume.',
+    affLink:'YOUR_BINANCE_REF_LINK',
+    hot:true, isNew:false
+  },
+  {
+    id:'coinbase', name:'Coinbase', cat:'cex-spot',
+    logo:'https://www.coinbase.com/img/favicon/favicon-32x32.png',
+    color:'#0052FF',
+    overall:8.7, fees:7.0, liquidity:8.5, security:9.8,
+    geo:['global','us','eu'],
+    geoLabel:'Global + US',
+    desc:'Most trusted US-regulated crypto exchange.',
+    affLink:'YOUR_COINBASE_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'kraken', name:'Kraken', cat:'cex-spot',
+    logo:'https://www.kraken.com/favicon.ico',
+    color:'#5741D9',
+    overall:8.5, fees:7.5, liquidity:8.0, security:9.5,
+    geo:['global','us','eu'],
+    geoLabel:'Global + US',
+    desc:'Veteran exchange known for top-tier security.',
+    affLink:'YOUR_KRAKEN_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'okx', name:'OKX', cat:'cex-spot',
+    logo:'https://www.okx.com/favicon.ico',
+    color:'#121212',
+    overall:8.8, fees:8.5, liquidity:9.0, security:8.5,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Feature-rich exchange with deep order books.',
+    affLink:'YOUR_OKX_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'bybit', name:'Bybit', cat:'cex-spot',
+    logo:'https://www.bybit.com/favicon.ico',
+    color:'#F7A600',
+    overall:8.6, fees:8.8, liquidity:8.8, security:8.0,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Fast-growing exchange with low fees & deep liquidity.',
+    affLink:'YOUR_BYBIT_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'kucoin', name:'KuCoin', cat:'cex-spot',
+    logo:'https://www.kucoin.com/favicon.ico',
+    color:'#23AF91',
+    overall:8.0, fees:8.0, liquidity:8.0, security:7.5,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Altcoin paradise with 700+ trading pairs.',
+    affLink:'YOUR_KUCOIN_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'bitget', name:'Bitget', cat:'cex-spot',
+    logo:'https://www.bitget.com/favicon.ico',
+    color:'#00F0FF',
+    overall:7.8, fees:8.2, liquidity:7.8, security:7.5,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Growing exchange with copy trading features.',
+    affLink:'YOUR_BITGET_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'gateio', name:'Gate.io', cat:'cex-spot',
+    logo:'https://www.gate.io/favicon.ico',
+    color:'#E01E5A',
+    overall:7.5, fees:8.0, liquidity:7.5, security:7.0,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Huge selection of early-stage altcoins.',
+    affLink:'YOUR_GATEIO_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'mexc', name:'MEXC', cat:'cex-spot',
+    logo:'https://www.mexc.com/favicon.ico',
+    color:'#3B5AF6',
+    overall:7.3, fees:8.5, liquidity:7.0, security:6.8,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Zero maker fees on many pairs. Wide altcoin selection.',
+    affLink:'YOUR_MEXC_REF_LINK',
+    hot:false, isNew:false
+  },
+
+  // ---- DEX ----
+  {
+    id:'uniswap', name:'Uniswap', cat:'dex',
+    logo:'https://app.uniswap.org/favicon.ico',
+    color:'#FF007A',
+    overall:9.0, fees:8.0, liquidity:9.5, security:9.0,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Permissionless)',
+    desc:'The original AMM. Largest DEX by volume on Ethereum.',
+    affLink:'YOUR_UNISWAP_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'jupiter', name:'Jupiter', cat:'dex',
+    logo:'https://jup.ag/favicon.ico',
+    color:'#6EE7B7',
+    overall:8.8, fees:8.5, liquidity:8.8, security:8.5,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Solana)',
+    desc:'Best DEX aggregator on Solana. Ultra-low fees.',
+    affLink:'YOUR_JUPITER_REF_LINK',
+    hot:true, isNew:false
+  },
+  {
+    id:'curve', name:'Curve Finance', cat:'dex',
+    logo:'https://curve.fi/favicon.ico',
+    color:'#FF0000',
+    overall:8.5, fees:9.0, liquidity:8.5, security:9.0,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Multichain)',
+    desc:'Stablecoin & pegged asset DEX king. Minimal slippage.',
+    affLink:'YOUR_CURVE_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'1inch', name:'1inch', cat:'dex',
+    logo:'https://1inch.io/favicon.ico',
+    color:'#2B4EFF',
+    overall:8.3, fees:9.2, liquidity:8.8, security:8.5,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Multichain)',
+    desc:'DEX aggregator. Finds best price across all DEXes.',
+    affLink:'YOUR_1INCH_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'pancakeswap', name:'PancakeSwap', cat:'dex',
+    logo:'https://pancakeswap.finance/favicon.ico',
+    color:'#1FC7D4',
+    overall:8.0, fees:8.5, liquidity:8.2, security:8.0,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (BSC + Multi)',
+    desc:'Top DEX on BNB Chain with low fees.',
+    affLink:'YOUR_PANCAKE_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'raydium', name:'Raydium', cat:'dex',
+    logo:'https://raydium.io/favicon.ico',
+    color:'#4E44CE',
+    overall:8.2, fees:8.3, liquidity:8.4, security:8.0,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Solana)',
+    desc:'Solana\'s leading AMM with concentrated liquidity.',
+    affLink:'YOUR_RAYDIUM_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'aerodrome', name:'Aerodrome', cat:'dex',
+    logo:'https://aerodrome.finance/favicon.ico',
+    color:'#2563EB',
+    overall:8.4, fees:9.0, liquidity:8.2, security:8.5,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Base)',
+    desc:'Leading DEX on Base chain. ve(3,3) model.',
+    affLink:'YOUR_AERODROME_REF_LINK',
+    hot:false, isNew:true
+  },
+  {
+    id:'camelot', name:'Camelot DEX', cat:'dex',
+    logo:'https://app.camelot.exchange/favicon.ico',
+    color:'#F59E0B',
+    overall:7.8, fees:8.5, liquidity:7.5, security:8.0,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Arbitrum)',
+    desc:'Native Arbitrum DEX with dual AMM model.',
+    affLink:'YOUR_CAMELOT_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'odos', name:'Odos', cat:'dex',
+    logo:'https://app.odos.xyz/favicon.ico',
+    color:'#8B5CF6',
+    overall:8.1, fees:8.8, liquidity:8.3, security:8.0,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Multichain)',
+    desc:'Advanced DEX aggregator with multi-input routing.',
+    affLink:'YOUR_ODOS_REF_LINK',
+    hot:false, isNew:true
+  },
+
+  // ---- PERP CEX ----
+  {
+    id:'binance-futures', name:'Binance Futures', cat:'perp-cex',
+    logo:'https://bin.bnbstatic.com/static/images/common/favicon.ico',
+    color:'#F0B90B',
+    overall:9.3, fees:8.8, liquidity:9.8, security:8.5,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'World\'s most liquid perp futures platform.',
+    affLink:'YOUR_BINANCE_FUTURES_REF_LINK',
+    hot:true, isNew:false
+  },
+  {
+    id:'bybit-deriv', name:'Bybit Derivatives', cat:'perp-cex',
+    logo:'https://www.bybit.com/favicon.ico',
+    color:'#F7A600',
+    overall:9.0, fees:9.0, liquidity:9.2, security:8.5,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Top-tier perps with deep liquidity and 0 maker fees.',
+    affLink:'YOUR_BYBIT_DERIV_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'okx-deriv', name:'OKX Derivatives', cat:'perp-cex',
+    logo:'https://www.okx.com/favicon.ico',
+    color:'#121212',
+    overall:8.9, fees:8.8, liquidity:9.0, security:8.5,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Advanced derivatives suite with wide instrument coverage.',
+    affLink:'YOUR_OKX_DERIV_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'bitget-futures', name:'Bitget Futures', cat:'perp-cex',
+    logo:'https://www.bitget.com/favicon.ico',
+    color:'#00F0FF',
+    overall:8.2, fees:8.5, liquidity:8.2, security:7.8,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Copy trading + perp futures. Strong UX.',
+    affLink:'YOUR_BITGET_FUTURES_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'bingx', name:'BingX', cat:'perp-cex',
+    logo:'https://bingx.com/favicon.ico',
+    color:'#0A85E5',
+    overall:7.8, fees:8.5, liquidity:7.5, security:7.5,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Social trading platform with copy trade perps.',
+    affLink:'YOUR_BINGX_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'mexc-futures', name:'MEXC Futures', cat:'perp-cex',
+    logo:'https://www.mexc.com/favicon.ico',
+    color:'#3B5AF6',
+    overall:7.5, fees:8.8, liquidity:7.2, security:7.0,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Zero-fee futures on popular pairs.',
+    affLink:'YOUR_MEXC_FUTURES_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'phemex', name:'Phemex', cat:'perp-cex',
+    logo:'https://phemex.com/favicon.ico',
+    color:'#16C784',
+    overall:8.0, fees:8.8, liquidity:7.8, security:8.0,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Professional perp trading with subscription model for 0 fees.',
+    affLink:'YOUR_PHEMEX_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'deribit', name:'Deribit', cat:'perp-cex',
+    logo:'https://deribit.com/favicon.ico',
+    color:'#2EC4B6',
+    overall:8.6, fees:8.0, liquidity:8.8, security:9.0,
+    geo:['global','eu','asia','no-us'],
+    geoLabel:'Global (No US)',
+    desc:'Leading platform for BTC & ETH options and futures.',
+    affLink:'YOUR_DERIBIT_REF_LINK',
+    hot:false, isNew:false
+  },
+
+  // ---- PERP DEX ----
+  {
+    id:'hyperliquid', name:'Hyperliquid', cat:'perp-dex',
+    logo:'https://hyperliquid.xyz/favicon.ico',
+    color:'#00E5B4',
+    overall:9.4, fees:9.5, liquidity:9.2, security:9.0,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Permissionless)',
+    desc:'The fastest perp DEX. On-chain order book with CEX-level UX.',
+    affLink:'YOUR_HYPERLIQUID_REF_LINK',
+    hot:true, isNew:false
+  },
+  {
+    id:'dydx', name:'dYdX', cat:'perp-dex',
+    logo:'https://dydx.exchange/favicon.ico',
+    color:'#6966FF',
+    overall:9.0, fees:8.8, liquidity:8.8, security:9.2,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Permissionless)',
+    desc:'Pioneer decentralized perps on its own L1 chain.',
+    affLink:'YOUR_DYDX_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'gmx', name:'GMX', cat:'perp-dex',
+    logo:'https://gmx.io/favicon.ico',
+    color:'#2D42FC',
+    overall:8.8, fees:8.2, liquidity:8.5, security:9.0,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Arbitrum/Avax)',
+    desc:'GLP model perp DEX. Earn yield by providing liquidity.',
+    affLink:'YOUR_GMX_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'drift', name:'Drift Protocol', cat:'perp-dex',
+    logo:'https://drift.trade/favicon.ico',
+    color:'#9945FF',
+    overall:8.5, fees:8.8, liquidity:8.0, security:8.5,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Solana)',
+    desc:'Full-featured perp DEX on Solana. JIT liquidity model.',
+    affLink:'YOUR_DRIFT_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'vertex', name:'Vertex Protocol', cat:'perp-dex',
+    logo:'https://vertexprotocol.com/favicon.ico',
+    color:'#5CFFE4',
+    overall:8.3, fees:9.0, liquidity:7.8, security:8.5,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Arbitrum)',
+    desc:'Hybrid CLOB + AMM perp DEX with blazing speed.',
+    affLink:'YOUR_VERTEX_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'kwenta', name:'Kwenta / Synthetix', cat:'perp-dex',
+    logo:'https://kwenta.eth.limo/favicon.ico',
+    color:'#C9B100',
+    overall:8.0, fees:8.0, liquidity:7.5, security:8.8,
+    geo:['global','us','eu','asia'],
+    geoLabel:'Global (Optimism)',
+    desc:'Synthetix-powered perps. Deep liquidity via sUSD.',
+    affLink:'YOUR_KWENTA_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'apex', name:'ApeX Pro', cat:'perp-dex',
+    logo:'https://apex.exchange/favicon.ico',
+    color:'#E1502E',
+    overall:7.8, fees:8.5, liquidity:7.5, security:8.0,
+    geo:['global','eu','asia'],
+    geoLabel:'Global (StarkEx)',
+    desc:'Non-custodial perp exchange using StarkEx for speed.',
+    affLink:'YOUR_APEX_REF_LINK',
+    hot:false, isNew:false
+  },
+  {
+    id:'rabbitx', name:'RabbitX', cat:'perp-dex',
+    logo:'https://rabbitx.io/favicon.ico',
+    color:'#FF4D4D',
+    overall:7.5, fees:8.8, liquidity:7.0, security:7.8,
+    geo:['global','eu','asia'],
+    geoLabel:'Global (Starknet)',
+    desc:'0-fee perp DEX on Starknet with global orderbook.',
+    affLink:'YOUR_RABBITX_REF_LINK',
+    hot:false, isNew:true
+  },
+  {
+    id:'aevo', name:'Aevo', cat:'perp-dex',
+    logo:'https://aevo.xyz/favicon.ico',
+    color:'#A855F7',
+    overall:8.1, fees:8.7, liquidity:7.8, security:8.5,
+    geo:['global','eu','asia'],
+    geoLabel:'Global (L2 Rollup)',
+    desc:'Options & perp DEX on dedicated L2. Pre-launch markets.',
+    affLink:'YOUR_AEVO_REF_LINK',
+    hot:false, isNew:true
+  }
+];
+
+// ============================================================
+// RENDER ENGINE
+// ============================================================
+let activeCategory = 'all';
+let activeGeo = 'all';
+let searchQuery = '';
+let sortBy = 'overall';
+
+function getScoreColor(score) {
+  if (score >= 8.5) return '#10b981';
+  if (score >= 7.0) return '#f59e0b';
+  return '#ef4444';
+}
+
+function getStars(score) {
+  const stars = Math.round(score / 2);
+  return '★'.repeat(stars) + '☆'.repeat(5 - stars);
+}
+
+function catLabel(cat) {
+  const map = { 'cex-spot': 'CEX Spot', 'dex': 'DEX', 'perp-cex': 'Perp CEX', 'perp-dex': 'Perp DEX' };
+  return map[cat] || cat;
+}
+
+function catTagClass(cat) {
+  const map = { 'cex-spot': 'tag-cex', 'dex': 'tag-dex', 'perp-cex': 'tag-perp-cex', 'perp-dex': 'tag-perp-dex' };
+  return map[cat] || '';
+}
+
+function buildCard(ex, rank) {
+  const scoreColor = getScoreColor(ex.overall);
+  const rankClass = rank === 1 ? 'rank-1' : rank === 2 ? 'rank-2' : rank === 3 ? 'rank-3' : 'rank-other';
+  const rankLabel = rank <= 3 ? `#${rank}` : '';
+  const fW = (v) => (v / 10 * 100).toFixed(0);
+
+  return `
+  <div class="card" data-cat="${ex.cat}" data-geo="${ex.geo.join(' ')}">
+    ${ex.hot ? '<div class="hot-badge">🔥 Hot</div>' : ''}
+    ${ex.isNew && !ex.hot ? '<div class="new-badge">✨ New</div>' : ''}
+    ${rankLabel ? `<div class="rank-badge ${rankClass}">${rankLabel}</div>` : ''}
+
+    <div class="card-top">
+      <div class="logo-wrap">
+        <img src="${ex.logo}" alt="${ex.name}"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="logo-fallback" style="display:none;background:${ex.color}20;color:${ex.color};">
+          ${ex.name.charAt(0)}
+        </div>
+      </div>
+      <div class="card-meta">
+        <div class="card-name">${ex.name}</div>
+        <div class="card-tags">
+          <span class="tag ${catTagClass(ex.cat)}">${catLabel(ex.cat)}</span>
+          <span class="tag tag-geo">🌍 ${ex.geoLabel}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="score-overall">
+      <div class="score-big" style="color:${scoreColor}">${ex.overall}</div>
+      <div class="score-label-wrap">
+        <div class="score-label">Overall Score</div>
+        <div class="score-stars" style="color:${scoreColor}">${getStars(ex.overall)}</div>
+      </div>
+    </div>
+
+    <div class="score-bars">
+      <div class="score-row">
+        <div class="score-row-label">Fees</div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:${fW(ex.fees)}%;background:linear-gradient(90deg,#10b981,#34d399)"></div>
+        </div>
+        <div class="score-row-val">${ex.fees}</div>
+      </div>
+      <div class="score-row">
+        <div class="score-row-label">Liquidity</div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:${fW(ex.liquidity)}%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+        </div>
+        <div class="score-row-val">${ex.liquidity}</div>
+      </div>
+      <div class="score-row">
+        <div class="score-row-label">Security</div>
+        <div class="score-bar-track">
+          <div class="score-bar-fill" style="width:${fW(ex.security)}%;background:linear-gradient(90deg,#7c3aed,#a78bfa)"></div>
+        </div>
+        <div class="score-row-val">${ex.security}</div>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <a href="${ex.affLink}" target="_blank" rel="noopener" class="btn-trade">
+        Trade Now →
+      </a>
+      <a href="${ex.affLink}" target="_blank" rel="noopener" class="btn-info" title="Visit ${ex.name}">↗</a>
+    </div>
+  </div>`;
+}
+
+function renderGrid() {
+  let filtered = exchanges.filter(ex => {
+    if (activeCategory !== 'all' && ex.cat !== activeCategory) return false;
+    if (activeGeo !== 'all') {
+      if (activeGeo === 'no-us' && !ex.geo.includes('no-us')) return false;
+      if (activeGeo !== 'no-us' && !ex.geo.includes(activeGeo)) return false;
+    }
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      if (!ex.name.toLowerCase().includes(q) && !ex.desc.toLowerCase().includes(q)) return false;
+    }
+    return true;
+  });
+
+  // Sort
+  filtered.sort((a, b) => {
+    if (sortBy === 'name') return a.name.localeCompare(b.name);
+    return b[sortBy] - a[sortBy];
+  });
+
+  const grid = document.getElementById('mainGrid');
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="no-results">😕 No platforms found matching your filters.</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map((ex, i) => buildCard(ex, i + 1)).join('');
+}
+
+// TABS
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCategory = btn.dataset.cat;
+    renderGrid();
+  });
+});
+
+// GEO FILTER
+document.querySelectorAll('.geo-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.geo-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeGeo = btn.dataset.geo;
+    renderGrid();
+  });
+});
+
+// SEARCH
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  renderGrid();
+});
+
+// SORT
+document.getElementById('sortSelect').addEventListener('change', e => {
+  sortBy = e.target.value;
+  renderGrid();
+});
+
+// SCROLL TOP
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('scrollTop');
+  if (window.scrollY > 400) btn.classList.add('visible');
+  else btn.classList.remove('visible');
+});
+
+// INIT
+renderGrid();
+</script>
+</body>
+</html>
